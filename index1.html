@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Online Pasala – ඔන්ලයින් පාසල</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;600;800&family=Noto+Serif+Sinhala:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef3f6;--surface:#fff;--ink:#14283a;--muted:#51677a;--line:#cfdbe3;--teal:#1f7a74;--gold:#f2a900;--gold-ink:#14283a;--board:#14333b;--board-ink:#f3f1e7;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0f1b24;--surface:#162a37;--ink:#e8eef2;--muted:#9bb0bf;--line:#28414f;--teal:#5cc2b9;--board:#0b2a31}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0f1b24;--surface:#162a37;--ink:#e8eef2;--muted:#9bb0bf;--line:#28414f;--teal:#5cc2b9;--board:#0b2a31}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.75 "Noto Sans Sinhala",system-ui,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;flex-wrap:wrap}
+.logo{font:700 22px "Noto Serif Sinhala",serif;text-decoration:none;color:var(--ink)}
+.logo span{color:var(--teal)}
+nav a{color:var(--muted);text-decoration:none;margin-left:18px}
+nav a:hover{color:var(--ink)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.hero{background:var(--board);color:var(--board-ink);border-radius:18px;padding:44px 32px;display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
+.hero h1{font:700 clamp(30px,5vw,46px)/1.35 "Noto Serif Sinhala",serif;margin:0 0 14px}
+.hero p{margin:0 0 22px;opacity:.88;max-width:34em}
+.btn{display:inline-block;background:var(--gold);color:var(--gold-ink);font:600 16px "Noto Sans Sinhala",sans-serif;border:0;border-radius:10px;padding:12px 22px;cursor:pointer;text-decoration:none}
+.btn.alt{background:transparent;border:2px solid currentColor;color:inherit;margin-left:8px}
+.shelf{display:flex;gap:12px;align-items:flex-end;justify-content:center;border-bottom:8px solid #8a6a3b;padding:0 10px}
+.spine{width:46px;border-radius:4px 4px 0 0;display:flex;align-items:center;justify-content:center;font:700 13px "Noto Sans Sinhala",sans-serif;writing-mode:vertical-rl;color:#fff;padding:10px 0}
+section{padding:46px 0 0}
+h2{font:700 28px/1.4 "Noto Serif Sinhala",serif;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px}
+.book{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.cover{height:150px;display:flex;align-items:flex-end;padding:14px;color:#fff;font:700 19px/1.4 "Noto Serif Sinhala",serif}
+.book .body{padding:14px;display:flex;flex-direction:column;gap:8px;flex:1}
+.tag{font-size:14px;color:var(--muted)}
+.book .btn{margin-top:auto;font-size:15px;padding:9px 14px;text-align:center}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px}
+.plan.main{border:2px solid var(--teal)}
+.plan h3{margin:0 0 4px;font:700 20px "Noto Serif Sinhala",serif}
+.plan ul{padding-left:20px;margin:12px 0 0;color:var(--muted)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.steps div{border-left:4px solid var(--teal);padding:4px 0 4px 14px}
+.steps b{display:block}
+.steps span{color:var(--muted);font-size:16px}
+footer{margin-top:56px;border-top:1px solid var(--line);padding:26px 0 40px;color:var(--muted);font-size:15px}
+footer a{color:var(--muted);margin-right:16px}
+/* reader */
+dialog{border:0;border-radius:14px;padding:0;width:min(720px,94vw);max-height:92vh;background:var(--surface);color:var(--ink)}
+dialog::backdrop{background:rgba(10,20,28,.6)}
+.rhead{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;border-bottom:1px solid var(--line)}
+.rhead button{background:none;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer;font:inherit}
+.rbar{padding:10px 18px;background:var(--bg);display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:15px}
+.rbar input{font:inherit;padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);min-width:0;flex:1}
+.page{position:relative;padding:26px 28px;min-height:300px;font:400 19px/2 "Noto Serif Sinhala",serif;user-select:none;-webkit-user-select:none;overflow:hidden}
+.wm{position:absolute;inset:-40%;display:flex;flex-wrap:wrap;gap:46px 60px;transform:rotate(-24deg);pointer-events:none;opacity:.11;font:700 16px system-ui,sans-serif;align-content:center}
+.lock{text-align:center;padding:34px 20px}
+.nav2{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;border-top:1px solid var(--line)}
+.nav2 button{background:var(--teal);color:#fff;border:0;border-radius:8px;padding:8px 16px;cursor:pointer;font:inherit}
+.nav2 button:disabled{opacity:.4;cursor:default}
+@media (max-width:760px){.hero{grid-template-columns:1fr;padding:30px 20px}.shelf{order:-1}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <a class="logo" href="#top">Online <span>Pasala</span></a>
+  <nav><a href="#books">පොත්</a><a href="#plans">සාමාජිකත්වය</a><a href="#how">ක්‍රියාකරන ආකාරය</a><a href="#authors">ලේඛකයන්ට</a></nav>
+</header>
+
+<div class="hero" id="top">
+  <div>
+    <h1>පොත් කියවන්න, ඕනෑම තැනක සිට</h1>
+    <p>Online Pasala යනු සිංහල සහ ඉංග්‍රීසි E-books අන්තර්ජාලයේම කියවීමට ඇති පුස්තකාලයයි. මාසික ගාස්තුවකට සීමාවකින් තොරව කියවන්න, නැතහොත් ඔබට ඕන පොත පමණක් මිලට ගන්න.</p>
+    <a class="btn" href="#books">පොත් බලන්න</a><a class="btn alt" href="#plans">සාමාජික වන්න</a>
+  </div>
+  <div class="shelf" aria-hidden="true">
+    <div class="spine" style="height:150px;background:#1f7a74">ගණකාධිකරණය</div>
+    <div class="spine" style="height:185px;background:#b4472f">කෙටිකතා</div>
+    <div class="spine" style="height:130px;background:#4a4a9c">ඉතිහාසය</div>
+    <div class="spine" style="height:170px;background:#8a6a3b">විද්‍යාව</div>
+    <div class="spine" style="height:145px;background:#2f6b3a">ව්‍යාපාරය</div>
+  </div>
+</div>
+
+<section id="books">
+  <h2>පොත් එකතුව</h2>
+  <p class="sub">මේ පොත් නිදර්ශන පමණි. කියවීමේ පහසුකම අත්හදා බැලීමට “කියවන්න” ඔබන්න.</p>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section id="plans">
+  <h2>කියවීමට ක්‍රම තුනක්</h2>
+  <p class="sub">ඔබට ගැලපෙන ක්‍රමය තෝරන්න.</p>
+  <div class="plans">
+    <div class="plan"><h3>නොමිලේ</h3><p>සෑම පොතකම මුල් පිටු කිහිපයක් නොමිලේ කියවන්න.</p><ul><li>ලියාපදිංචියක් අවශ්‍ය නැත</li><li>ඉතිරිය කියවීමට ගෙවීම</li></ul></div>
+    <div class="plan main"><h3>මාසික / වාර්ෂික සාමාජිකත්වය</h3><p>ගාස්තුවක් ගෙවා සියලු පොත් සීමාවකින් තොරව කියවන්න.</p><ul><li>සියලු පොත් වෙත ප්‍රවේශය</li><li>ඕනෑම උපාංගයකින් කියවීම</li></ul><p><a class="btn" href="#how">සාමාජික වන්න</a></p></div>
+    <div class="plan"><h3>පොතකට ගෙවීම</h3><p>ඔබට අවශ්‍ය පොත පමණක් මිලට ගන්න හෝ කාලයක් සඳහා කුලියට ගන්න.</p><ul><li>සාමාජිකත්වයක් අවශ්‍ය නැත</li><li>ගෙවූ පොත ඔබේ ගිණුමේ තැන්පත් වේ</li></ul></div>
+  </div>
+</section>
+
+<section id="how">
+  <h2>ක්‍රියාකරන ආකාරය</h2>
+  <p class="sub">පොත් ආරක්ෂා වන ආකාරය සහ ගෙවීම් ක්‍රම.</p>
+  <div class="steps">
+    <div><b>වෙබ් අඩවිය තුළම කියවීම</b><span>පොත් Download නොකර, වෙබ් අඩවිය තුළ පමණක් කියවිය හැක.</span></div>
+    <div><b>පරිශීලක වොටර්මාර්ක්</b><span>කියවන අතරතුර ඔබේ නම හෝ ඉමේල් ලිපිනය පිටුවේ පසුබිමේ දිස්වේ.</span></div>
+    <div><b>Copy සීමා කිරීම</b><span>Text Copy කිරීම සහ Right-click කිරීම කියවන ප්‍රදේශයේ අවහිර කර ඇත.</span></div>
+    <div><b>ආරක්ෂිත ගෙවීම්</b><span>PayHere, WebXpay, Genie හරහා Card හෝ Mobile Pay භාවිතා කළ හැක.</span></div>
+  </div>
+</section>
+
+<section id="authors">
+  <h2>ලේඛකයන්ට සහ ප්‍රකාශකයන්ට</h2>
+  <p class="sub">ඔබේ පොත් Online Pasala හරහා පාඨකයන් වෙත ගෙන යන්න. කතෘ හිමිකම සහ Royalty ගෙවීම් ගිවිසුමකින් තහවුරු කෙරේ.</p>
+  <a class="btn" href="mailto:hello@onlinepasala.example">අප අමතන්න</a>
+</section>
+
+<footer>
+  <a href="#top">රහස්‍යතා ප්‍රතිපත්තිය</a><a href="#top">සේවා කොන්දේසි</a>
+  <p>© 2026 Online Pasala</p>
+</footer>
+</div>
+
+<dialog id="reader" aria-label="පොත කියවන්න">
+  <div class="rhead"><strong id="rtitle"></strong><button id="rclose" type="button">වසන්න</button></div>
+  <div class="rbar"><label for="who">ඔබේ නම / ඉමේල්:</label><input id="who" value="reader@example.com" autocomplete="off"></div>
+  <div class="page" id="page"></div>
+  <div class="nav2"><button id="prev" type="button">පෙර</button><span id="pn"></span><button id="next" type="button">ඊළඟ</button></div>
+</dialog>
+
+<script>
+var books=[
+ {t:"ගණකාධිකරණය – 12 ශ්‍රේණිය",a:"නිදර්ශන පොත",c:"#1f7a74",p:"රු. 1,200",pages:["ගණකාධිකරණය යනු ව්‍යාපාරයක මුල්‍ය ගනුදෙනු වාර්තා කිරීම, වර්ගීකරණය කිරීම සහ සාරාංශගත කිරීමයි.","ගිණුම් සමීකරණය: වත්කම් = වගකීම් + හිමිකම්. සෑම ගනුදෙනුවක්ම මෙම සමීකරණය සමතුලිත කරයි.","(මෙම පිටුව ගෙවූ පාඨකයන්ට පමණි)"]},
+ {t:"සිංහල කෙටිකතා එකතුව",a:"නිදර්ශන පොත",c:"#b4472f",p:"රු. 850",pages:["ගමේ පාසල අසල ඇති පැරණි බෝධිය යට, සෑම සවසකම කතා කීමට මිනිසුන් රැස් වූහ.","ඔවුන්ගේ කතාවලින් ගමේ ඉතිහාසය ජීවමාන විය.","(මෙම පිටුව ගෙවූ පාඨකයන්ට පමණි)"]},
+ {t:"ශ්‍රී ලංකා ඉතිහාසය",a:"නිදර්ශන පොත",c:"#4a4a9c",p:"රු. 1,000",pages:["ශ්‍රී ලංකාවේ ඉතිහාසය අනුරාධපුර යුගයෙන් ආරම්භ කර අධ්‍යයනය කළ හැක.","රාජධානි ගණනාවක් එකිනෙකට පසුව පැවතුණි.","(මෙම පිටුව ගෙවූ පාඨකයන්ට පමණි)"]},
+ {t:"ව්‍යාපාර අධ්‍යයනය – හැඳින්වීම",a:"නිදර්ශන පොත",c:"#2f6b3a",p:"රු. 950",pages:["ව්‍යාපාරයක් යනු ලාභය අරමුණු කර භාණ්ඩ හෝ සේවා සැපයීමේ ක්‍රියාවලියයි.","ව්‍යාපාර ආකෘති අතර තනි හිමිකාරිත්වය, හවුල් ව්‍යාපාර සහ සමාගම් ඇතුළත් වේ.","(මෙම පිටුව ගෙවූ පාඨකයන්ට පමණි)"]}
+];
+var FREE=2,cur=null,pg=0;
+var grid=document.getElementById("grid");
+books.forEach(function(b,i){
+  var d=document.createElement("div");d.className="book";
+  d.innerHTML='<div class="cover" style="background:'+b.c+'">'+b.t+'</div><div class="body"><span class="tag">'+b.a+' · '+b.p+'</span><button class="btn" type="button" data-i="'+i+'">කියවන්න</button></div>';
+  grid.appendChild(d);
+});
+var dlg=document.getElementById("reader"),page=document.getElementById("page"),who=document.getElementById("who");
+function wm(){var n=who.value||"reader",s="";for(var i=0;i<60;i++)s+="<span>"+n.replace(/</g,"&lt;")+"</span>";return '<div class="wm" aria-hidden="true">'+s+'</div>'}
+function render(){
+  var b=books[cur];
+  document.getElementById("rtitle").textContent=b.t;
+  var locked=pg>=FREE;
+  page.innerHTML=wm()+(locked?'<div class="lock"><p><strong>නොමිලේ පිටු අවසන්.</strong></p><p>ඉතිරිය කියවීමට සාමාජික වන්න, නැතහොත් '+b.p+' කට මිලට ගන්න.</p><a class="btn" href="#plans" id="go">ගෙවීම් ක්‍රම බලන්න</a></div>':'<p>'+b.pages[pg]+'</p>');
+  document.getElementById("pn").textContent=(pg+1)+" / "+b.pages.length;
+  document.getElementById("prev").disabled=pg===0;
+  document.getElementById("next").disabled=pg===b.pages.length-1;
+  var g=document.getElementById("go");if(g)g.onclick=function(){dlg.close()};
+}
+grid.addEventListener("click",function(e){var i=e.target.getAttribute("data-i");if(i===null)return;cur=+i;pg=0;render();dlg.showModal()});
+document.getElementById("prev").onclick=function(){pg--;render()};
+document.getElementById("next").onclick=function(){pg++;render()};
+document.getElementById("rclose").onclick=function(){dlg.close()};
+who.addEventListener("input",function(){render()});
+["contextmenu","copy","cut","dragstart","selectstart"].forEach(function(ev){page.addEventListener(ev,function(e){e.preventDefault()})});
+</script>
+</body>
+</html>
